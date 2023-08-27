@@ -22,8 +22,12 @@ int main(int ac, char **av)
 	}
 	lines_m.word_line = malloc(1024 * sizeof(int));
 	tokenize_file(av[1]);
-	for (i = 0; i < lines_m.lines_count && lines_m.lines[i] != NULL; i++)
+	for (i = 0; i < lines_m.lines_count; i++)
 	{
+		if (lines_m.lines[i] == NULL || lines_m.lines[i][0] == NULL)
+		{
+			continue;
+		}
 		if (lines_m.lines[i][0][0] == '#')
 		{
 			continue;
@@ -31,7 +35,7 @@ int main(int ac, char **av)
 		function = get_function(lines_m.lines[i][0]);
 		if (function == NULL)
 		{
-			fprintf(stderr, "L%u: unknown instruction\n", (i + 1));
+			fprintf(stderr, "L%u: unknown instruction %s\n", (i + 1), lines_m.lines[i][0]);
 			f_exit(stack);
 		}
 		function(&stack, i + 1);

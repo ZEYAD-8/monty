@@ -8,11 +8,20 @@
 void f_push(stack_t **stack, unsigned int line_number)
 {
 	stack_t *new_node = malloc(sizeof(stack_t));
+	int num;
 
 	(void)line_number;
-	new_node->n = 111;
 	if (lines_m.lines != NULL && lines_m.lines[line_number - 1] != NULL)
-		new_node->n = atoi(lines_m.lines[line_number - 1][1]);
+	{
+		if (!is_Numeric(lines_m.lines[line_number - 1][1]))
+		{
+			fprintf(stderr, "L%u: usage: push integer\n", line_number);
+			free(new_node);
+			f_exit(*stack);
+		}
+		num = atoi(lines_m.lines[line_number - 1][1]);
+		new_node->n = num;
+	}
 	new_node->next = NULL;
 	new_node->prev = NULL;
 	if (*stack != NULL)

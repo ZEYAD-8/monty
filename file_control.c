@@ -79,10 +79,32 @@ int count_lines(FILE *file)
 		if (c == '\n')
 			linesCount++;
 
+
 	if (c != '\n' && linesCount > 0)
 		linesCount++;
 
+	if (linesCount == 0)
+		linesCount++;
 	rewind(file);
 	return (linesCount);
 }
 
+/**
+ * is_Numeric - checks if the string is all numbers
+ * @str: the string to be checked
+ * Return: 0 if not a all numbers, 1 if all numbers.
+*/
+int is_Numeric(char *str)
+{
+	int length, i;
+
+	length = strlen(str);
+	for (i = 0; i < length; i++)
+	{
+		if (!isdigit(str[i]))
+		{
+			return (0);
+		}
+	}
+	return (1);
+}

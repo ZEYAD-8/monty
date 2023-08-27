@@ -65,6 +65,7 @@ void tokenize_file(const char *filepath);
 void free_lines(void);
 void free_stack(stack_t *top);
 void f_exit(stack_t *stack);
+int is_Numeric(char *str);
 
 void f_push(stack_t **stack, unsigned int line_number);
 void f_pall(stack_t **stack, unsigned int line_number);
